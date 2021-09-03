@@ -17,7 +17,7 @@ Where possible, each layer should be loosly coupled so they can be reused.
 ### Presentation
 Where possible it should be componentized
 List of presentation technologies
-- [ ] Console! (1)
+- [ ] Console (1)
 - [ ] Mvc/html/css (1)
 - [ ] Vue2/bootstrap (1)
 - [ ] Vue3/bootstrap
@@ -50,11 +50,11 @@ Will be linked to the communcation layer but plans are to use these languages
 
 ### Storage
 This wil be a mix between plain integrations and using ORMs and not all will be done in every language
-- [ ] MSSQL*
-- [ ] MYSQL*
+- [ ] MSSQL (1)
+- [ ] MYSQL (1)
 - [ ] PostgreSQL
-- [ ] NPOCO/PETAPOCO (Have to figure out which one)*
-- [ ] Entityframework
+- [ ] NPOCO/PETAPOCO (Have to figure out which one) (1)
+- [ ] Entityframework (1)
 - [ ] LocalStorage
 - [ ] MongoDb
 - [ ] Redis
