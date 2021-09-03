@@ -3,17 +3,23 @@ Trying out as many coding stacks/techniques in 100 days with a simple todo app
 
 # Idea/Why
 While traveling and meeting other devs I realized I have been way to comfortable in my own little C# backend bubble (with the ocasional web frontend and wpf). So it is time to start learning again and try out different frameworks/languages. It should also prove the 'ancient' wisdom that a programmer can write in any language as long as he understands the fundamental problem.
-Will aim at 1-2 hours a day.
+Will aim at 1-2 hours a day. Only days that are allowed to be skipped are Saturday/Sunday.
 
 # Scope
-### General
+## General
 The program will be split up into 3 parts with an optional 4th. Presentation, [Communication] , Logic, Storage.
 All Communication layers (API) should in essence serve the same output so all detached Presentation layers can process them.
 Where possible, each layer should be loosly coupled so they can be reused.
 
+### Features
+- Add/Remove Todo items
+- Mark/Unmark Todo items
+- Add/remove/edit notes on todo item (shows how to handle data dependecy and component usage)
+
 ### Out of scope
 - Authentication/authorization (user and aplication wide)
 
+# Tech stacks
 ### Presentation
 Where possible it should be componentized
 List of presentation technologies
@@ -60,6 +66,7 @@ This wil be a mix between plain integrations and using ORMs and not all will be 
 - [ ] Redis
 - [ ] CosmosDB
 - [ ] File
+- [ ] Umbraco (1)
 
 _(1) Stacks I already use and are more for completeness/practice
 </br>(2) I Shudder at this, but it has to be done_
