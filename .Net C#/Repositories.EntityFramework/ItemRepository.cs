@@ -19,37 +19,59 @@ namespace Todo.Repositories.EntityFramework
 
         public Item Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Items.Include(i => i.Notes).FirstOrDefault(i => i.Id == id)?.ToDomain();
         }
 
         public IEnumerable<Item> GetFiltered(ItemFilter filter)
         {
             // todo actually implement the filter
-            return _context.Items.Include(i => i.Notes).Select(i => i.ToDomain());
+            IQueryable<Models.Item> items = _context.Items.Include(i => i.Notes);
+            if (filter?.ArchivedOnly == true)
+            {
+                items = items.Where(i => i.ArchiveDate != null);
+            }
+
+            if (filter?.UnArchivedOnly == true)
+            {
+                items = items.Where(i => i.ArchiveDate == null);
+            }
+
+            return items.Select(i => i.ToDomain());
         }
 
         public Item Upsert(Item item)
         {
-            // this is just a test
-            var newItem = Models.Item.FromDomain(item);
-            _context.Items.Add(newItem);
-            _context.SaveChanges();
-            return newItem.ToDomain();
-
             // see if item exists
+            var existingItem = _context.Items.Include(i => i.Notes).FirstOrDefault(i => i.Id == item.Id);
 
             // if not, save and all its notes
+            if (existingItem == null)
+            {
+                var newItem = Models.Item.FromDomain(item);
+                _context.Items.Add(newItem);
+                _context.SaveChanges();
+                return newItem.ToDomain();
+            }
 
             // if exist, update notes list and update items
-
-            throw new NotImplementedException();
+            existingItem.UpdateFromDomain(item);
+            _context.Update(existingItem);
+            _context.SaveChanges();
+            return existingItem.ToDomain();
         }
 
         public bool Delete(Guid id)
         {
             // delete if exists
+            var existingItem = _context.Items.Include(i => i.Notes).FirstOrDefault(i => i.Id == id);
+            if (existingItem == null)
+            {
+                return false;
+            }
 
-            throw new NotImplementedException();
+            _context.Remove(existingItem);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

@@ -8,5 +8,7 @@ namespace Todo.Repositories.Filters
 {
     public class ItemFilter
     {
+        public bool UnArchivedOnly { get; set; }
+        public bool ArchivedOnly { get; set; }
     }
 }

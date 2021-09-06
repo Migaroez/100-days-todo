@@ -23,10 +23,17 @@ namespace Todo.Repositories.Models
         {
             return new Note
             {
-                Id = note.Id,
+                // We do not copy the Id
                 Content = note.Content,
                 CreateDate = note.CreateDate
             };
+        }
+
+        public Note UpdateFromDomain(Domain.Note note)
+        {
+            Content = note.Content;
+            CreateDate = note.CreateDate;
+            return this;
         }
     }
 }

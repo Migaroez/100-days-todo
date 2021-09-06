@@ -4,21 +4,29 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    
-    <h3>Test items</h3>
     @if (Model.Items?.Any() == true)
     {
-        <ul>
-            @foreach (var item in Model.Items)
-            {
-                <li>@item.Description</li>
-            }
-        </ul>
+        @foreach (var item in Model.Items)
+        {
+            <p>
+                <form asp-controller="Item" asp-action="ToggleComplete"
+                      method="post" role="form">
+                    @if (item.IsCompleted)
+                    {
+                        <span style="text-decoration: line-through;">@item.Description</span>
+                    }
+                    else
+                    {
+                        @item.Description
+                    }
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit">@(item.IsCompleted ? "Undo" : "Mark completed")</button>
+
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="button">Edit</button></a>
+                    <a asp-action="Archive" asp-route-id="@item.Id"><button type="button">Archive</button></a>
+                </form>
+            </p>
+        }
     }
-    else
-    {
-        <p>Test failed!</p>
-    }
+    <a asp-action="New"><button type="button">New</button></a>
 </div>

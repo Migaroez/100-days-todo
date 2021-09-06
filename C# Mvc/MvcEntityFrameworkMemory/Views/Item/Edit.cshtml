@@ -1,0 +1,21 @@
+﻿@model ItemSubmitModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if (Model.Id == null)
+    {
+        <h1> New item</h1>
+    }
+    else
+    {
+        <h1> Edit item</h1>
+    }
+<form asp-controller="Item" asp-action="Submit"
+      method="post" role="form">
+    <input type="hidden" asp-for="Id" />
+    <input asp-for="Description" />
+    <button type="submit">Save</button>
+</form>
+</div>
