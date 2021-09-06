@@ -10,5 +10,6 @@ namespace Todo.Repositories.Filters
     {
         public bool UnArchivedOnly { get; set; }
         public bool ArchivedOnly { get; set; }
+        public Guid? NoteId { get; set; }
     }
 }

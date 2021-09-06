@@ -1,0 +1,22 @@
+﻿@model NoteSubmitModel
+@{
+    ViewData["Title"] = "Edit Note";
+}
+
+<div class="text-center">
+    @if (Model.Id == null)
+    {
+        <h1> New note</h1>
+    }
+    else
+    {
+        <h1> Edit note</h1>
+    }
+<form asp-controller="Note" asp-action="Submit"
+      method="post" role="form">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ItemId" />
+    <input asp-for="Content" />
+    <button type="submit">Save</button>
+</form>
+</div>

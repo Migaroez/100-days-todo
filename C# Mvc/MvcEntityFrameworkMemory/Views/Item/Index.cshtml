@@ -22,6 +22,7 @@
                     <input type="hidden" name="id" value="@item.Id" />
                     <button type="submit">@(item.IsCompleted ? "Undo" : "Mark completed")</button>
 
+                    <a asp-action="Detail" asp-route-id="@item.Id"><button type="button">Details</button></a>
                     <a asp-action="Edit" asp-route-id="@item.Id"><button type="button">Edit</button></a>
                     <a asp-action="Archive" asp-route-id="@item.Id"><button type="button">Archive</button></a>
                 </form>

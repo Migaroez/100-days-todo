@@ -2,10 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MvcEntityFrameworkMemory.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Todo.Domain;
 using Todo.Repositories;
 using Todo.Repositories.Filters;

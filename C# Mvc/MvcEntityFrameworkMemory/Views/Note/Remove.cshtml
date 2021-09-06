@@ -1,0 +1,15 @@
+﻿@model NoteSubmitModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Delete Note</h1>
+    <p>@Model.Content</p>
+    <form asp-controller="Note" asp-action="SubmitRemove"
+          method="post" role="form">
+        <input type="hidden" name="id" value="@Model.Id"/>
+        <button type="submit">Confirm</button>
+        <a asp-action="Index" asp-controller="Item"><button type="button">Cancel</button></a>
+    </form>
+</div>

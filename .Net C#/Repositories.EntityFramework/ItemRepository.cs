@@ -26,14 +26,25 @@ namespace Todo.Repositories.EntityFramework
         {
             // todo actually implement the filter
             IQueryable<Models.Item> items = _context.Items.Include(i => i.Notes);
-            if (filter?.ArchivedOnly == true)
+
+            if (filter == null)
+            {
+                return items.Select(i => i.ToDomain());
+            }
+
+            if (filter.ArchivedOnly)
             {
                 items = items.Where(i => i.ArchiveDate != null);
             }
 
-            if (filter?.UnArchivedOnly == true)
+            if (filter.UnArchivedOnly)
             {
                 items = items.Where(i => i.ArchiveDate == null);
+            }
+
+            if (filter.NoteId != null)
+            {
+                items = items.Where(i => i.Notes.Any(n => n.Id == filter.NoteId));
             }
 
             return items.Select(i => i.ToDomain());

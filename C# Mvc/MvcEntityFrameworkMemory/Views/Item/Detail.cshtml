@@ -1,10 +1,39 @@
-﻿@model Todo.Domain.Item
+﻿@using System.Globalization
+@model Todo.Domain.Item
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    
+
     <h3>Item Details</h3>
-    
+    <h4>Created on</h4>
+    <p>@Model.CreateDate</p>
+    @if (Model.ArchiveDate != null)
+    {
+        <h4>Archived on</h4>
+        <p>@Model.ArchiveDate.Value.ToString("g", CultureInfo.CurrentCulture)</p>
+    }
+    @if (Model.CompleteDate != null)
+    {
+        <h4>Completed on</h4>
+        <p>@Model.CompleteDate.Value.ToString("g", CultureInfo.CurrentCulture)</p>
+    }
+    @foreach (var note in Model.Notes)
+    {
+        <div>
+            <p>
+                [@note.CreateDate.ToString("g", CultureInfo.CurrentCulture)]
+                <br />
+                @note.Content
+                <a asp-controller="Note" asp-action="Edit" asp-route-id="@note.Id"><button type="button">Edit</button></a>
+                <a asp-controller="Note" asp-action="Remove" asp-route-id="@note.Id"><button type="button">Remove</button></a>
+            </p>
+
+        </div>
+    }
+
+    <a asp-controller="Note" asp-action="New" asp-route-itemId="@Model.Id"><button type="button">New note</button></a>
+    <a asp-controller="Item" asp-action="Index" ><button type="button">Back to list</button></a>
+
 </div>
