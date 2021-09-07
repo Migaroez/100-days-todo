@@ -25,7 +25,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.GetFiltered(new ItemFilter { NoteId = id }).SingleOrDefault();
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Edit", "Item not found");
+                TempData["Invalid Action"] = "Cannot edit note,Item not found";
                 return RedirectToAction("Index", "Item");
             }
 
@@ -34,7 +34,8 @@ namespace MvcEntityFrameworkMemory.Controllers
             return View(new NoteSubmitModel()
             {
                 Id = id,
-                Content = note.Content
+                Content = note.Content,
+                ItemId = item.Id.Value
             });
         }
 
@@ -52,7 +53,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = note.Id == null ? _itemRepository.Get(note.ItemId) : _itemRepository.GetFiltered(new ItemFilter { NoteId = note.Id }).SingleOrDefault();
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Submit note", "Item not found");
+                TempData["Invalid Action"] = "Cannot submit note, Item not found";
                 return RedirectToAction("Index", "Item");
             }
 
@@ -66,7 +67,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var existingNote = item.Notes.FirstOrDefault(n => n.Id == note.Id);
             if (existingNote == null)
             {
-                ViewData.ModelState.AddModelError("Submit note", "Note not found");
+                TempData["Invalid Action"] = "Cannot submit note, Note not found";
                 return RedirectToAction("Detail", "Item", new { id = note.ItemId });
             }
 
@@ -80,21 +81,22 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.GetFiltered(new ItemFilter { NoteId = id }).SingleOrDefault();
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Remove Note", "Item not found");
+                TempData["Invalid Action"] = "Cannot remove note, Item not found";
                 return RedirectToAction("Index", "Item");
             }
 
             var note = item.Notes.FirstOrDefault(n => n.Id == id);
             if (note == null)
             {
-                ViewData.ModelState.AddModelError("Remove note", "Note not found");
+                TempData["Invalid Action"] = "Cannot remove note, Note not found";
                 return RedirectToAction("Detail", "Item", new { id = item.Id });
             }
 
             return View(new NoteSubmitModel
             {
                 Id = note.Id,
-                Content = note.Content
+                Content = note.Content,
+                ItemId = item.Id.Value
             });
         }
 
@@ -104,14 +106,14 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.GetFiltered(new ItemFilter { NoteId = id }).SingleOrDefault();
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Remove Note", "Item not found");
+                TempData["Invalid Action"] = "Cannot remove note, Item not found";
                 return RedirectToAction("Index", "Item");
             }
 
             var note = item.Notes.FirstOrDefault(n => n.Id == id);
             if (note == null)
             {
-                ViewData.ModelState.AddModelError("Remove note", "Note not found");
+                TempData["Invalid Action"] = "Cannot remove note, Note not found";
                 return RedirectToAction("Detail", "Item", new { id = item.Id });
             }
 

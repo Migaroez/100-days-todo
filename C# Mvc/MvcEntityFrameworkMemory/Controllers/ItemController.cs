@@ -32,7 +32,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.Get(id);
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Toggle", "Item not found");
+                TempData["Invalid Action"] = "Can not toggle, Item not found";
                 return RedirectToAction("Index");
             }
 
@@ -47,7 +47,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.Get(id);
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Detail", "Item not found");
+                TempData["Invalid Action"] = "Cannot show detail, Item not found";
                 return RedirectToAction("Index");
             }
 
@@ -59,7 +59,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.Get(id);
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Edit", "Item not found");
+                TempData["Invalid Action"] = "Cannot Edit, Item not found";
                 return RedirectToAction("Index");
             }
 
@@ -99,7 +99,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.Get(id);
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("Archive", "Item not found");
+                TempData["Invalid Action"] = "Cannot archive, Item not found";
                 return RedirectToAction("Index");
             }
 
@@ -116,7 +116,7 @@ namespace MvcEntityFrameworkMemory.Controllers
             var item = _itemRepository.Get(id);
             if (item == null)
             {
-                ViewData.ModelState.AddModelError("SubmitArchive", "Item not found");
+                TempData["Invalid Action"] = "Cannot archive, Item not found";
                 return RedirectToAction("Index");
             }
             item.ArchiveDate = DateTimeOffset.Now;

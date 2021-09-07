@@ -16,7 +16,11 @@
       method="post" role="form">
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="ItemId" />
-    <input asp-for="Content" />
-    <button type="submit">Save</button>
+    <textarea asp-for="Content" autofocus></textarea>
+
+    <div class="mg-t-12">
+        <button type="submit" class="btn btn-resize bg-green"><i class="fas fa-check"></i> Save</button>
+        <a asp-controller="Item" asp-action="Detail" asp-route-id="@Model.ItemId"><button type="button" class="btn btn-resize bg-orange"><i class="fas fa-times"></i> Cancel</button></a>
+    </div>
 </form>
 </div>

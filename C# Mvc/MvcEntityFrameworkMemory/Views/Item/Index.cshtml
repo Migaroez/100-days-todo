@@ -1,33 +1,54 @@
-﻿@model ItemIndexViewModel
+﻿@using System.Globalization
+@model ItemIndexViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "";
 }
 
-<div class="text-center">
-    @if (Model.Items?.Any() == true)
-    {
+@if (Model.Items?.Any() == true)
+{
+    <h1>Todo List</h1>
+    <div class="todo-list">
         @foreach (var item in Model.Items)
         {
-            <p>
+            <div class="todo-text" title="Created on @item.CreateDate.ToString("g", CultureInfo.CurrentCulture)">
+                @if (item.IsCompleted)
+                {
+                    <span style="text-decoration: line-through;">@item.Description</span>
+                }
+                else
+                {
+                    @item.Description
+                }
+            </div>
+            <div>
                 <form asp-controller="Item" asp-action="ToggleComplete"
                       method="post" role="form">
-                    @if (item.IsCompleted)
-                    {
-                        <span style="text-decoration: line-through;">@item.Description</span>
-                    }
-                    else
-                    {
-                        @item.Description
-                    }
                     <input type="hidden" name="id" value="@item.Id" />
-                    <button type="submit">@(item.IsCompleted ? "Undo" : "Mark completed")</button>
-
-                    <a asp-action="Detail" asp-route-id="@item.Id"><button type="button">Details</button></a>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="button">Edit</button></a>
-                    <a asp-action="Archive" asp-route-id="@item.Id"><button type="button">Archive</button></a>
+                    <button type="submit" class="btn @(item.IsCompleted ? "bg-orange" : "bg-green")" title="@(item.IsCompleted ? "undo completed" : "mark completed")">
+                        @if (item.IsCompleted)
+                        {
+                            <i class="fas fa-times"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-check"></i>
+                        }
+                    </button>
                 </form>
-            </p>
+            </div>
+            <div>
+                <a asp-action="Detail" asp-route-id="@item.Id" title="Detail"><button type="button" class="btn bg-blue"><i class="fas fa-sticky-note"></i></button></a>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><button type="button" class="btn bg-blue"><i class="fas fa-pen"></i></button></a>
+            </div>
+            <div>
+                <a asp-action="Archive" asp-route-id="@item.Id" title="Archive"><button type="button" class="btn bg-red"><i class="fas fa-trash"></i></button></a>
+            </div>
         }
-    }
-    <a asp-action="New"><button type="button">New</button></a>
+    </div>
+}
+<div class="mg-t-12">
+    <a asp-action="New"><button type="button" class="btn btn-resize bg-green"><i class="fas fa-plus"></i> Add Item</button></a>
 </div>
+

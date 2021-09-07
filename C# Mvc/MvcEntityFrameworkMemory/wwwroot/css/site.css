@@ -1,71 +1,102 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+textarea {
+    min-height: 100px;
+    height: 200px;
+    min-width: 300px;
+    width: 600px;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+
+.center-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px;
+    grid-auto-rows: 200px;
+    grid-template-areas:
+                       ". a a ."
+                       ". a a .";
+}
+.center-item {
+    grid-area: a;
+    align-self: center;
+    justify-self: center;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.todo-list {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto auto;
+    column-gap:2px;
+    row-gap: 0.5em;
+    grid-auto-flow: row;
+    grid-template-areas:
+                       ". . . . .";
+}
+.todo-text {
+    margin-right: 6px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.notifications {
+    width: 100%;
+    padding: 6px;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
+.grid {
+    display: grid;
+    gap: 2px;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.grid-h3 {
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.btn {
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    width: 40px;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.btn.btn-resize {
+    width: auto;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.bg-green {
+    background-color: #4CAF50; /* Green */
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+.bg-blue {
+    background-color: #008CBA;
+}
+.bg-red {
+    background-color: #f44336;
+}
+.bg-white {
+    background-color: #e7e7e7;
+    color: black;
+}
+.bg-grey {
+    background-color: #555555;
+}
+.bg-orange {
+    background-color: #d2691e;
+}
+
+.mg-t-3 {
+    margin-top: 3px;
+}
+.mg-t-6 {
+    margin-top: 6px;
+}
+.mg-t-9 {
+    margin-top: 9px;
+}
+.mg-t-12 {
+    margin-top: 12px;
 }

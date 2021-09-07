@@ -1,39 +1,42 @@
 ﻿@using System.Globalization
 @model Todo.Domain.Item
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Detail";
 }
 
-<div class="text-center">
+<div>
+    <h1> @Model.Description</h1>
 
-    <h3>Item Details</h3>
-    <h4>Created on</h4>
-    <p>@Model.CreateDate</p>
-    @if (Model.ArchiveDate != null)
-    {
-        <h4>Archived on</h4>
-        <p>@Model.ArchiveDate.Value.ToString("g", CultureInfo.CurrentCulture)</p>
-    }
+    <h4>Created: @Model.CreateDate.ToString("g", CultureInfo.CurrentCulture)</h4>
     @if (Model.CompleteDate != null)
     {
-        <h4>Completed on</h4>
-        <p>@Model.CompleteDate.Value.ToString("g", CultureInfo.CurrentCulture)</p>
+        <h4>Completed: @Model.CompleteDate.Value.ToString("g", CultureInfo.CurrentCulture)</h4>
     }
-    @foreach (var note in Model.Notes)
+    @if (Model.ArchiveDate != null)
     {
-        <div>
-            <p>
-                [@note.CreateDate.ToString("g", CultureInfo.CurrentCulture)]
-                <br />
-                @note.Content
-                <a asp-controller="Note" asp-action="Edit" asp-route-id="@note.Id"><button type="button">Edit</button></a>
-                <a asp-controller="Note" asp-action="Remove" asp-route-id="@note.Id"><button type="button">Remove</button></a>
-            </p>
-
-        </div>
+        <h4>Archived: @Model.ArchiveDate.Value.ToString("g", CultureInfo.CurrentCulture)</h4>
     }
+    
+    <div class="grid grid-h3">
+        @foreach (var note in Model.Notes)
+        {
+            <div>
+                <p>
+                    [@note.CreateDate.ToString("g", CultureInfo.CurrentCulture)]
+                    <a asp-controller="Note" asp-action="Edit" asp-route-id="@note.Id" title="Edit"><button type="button" class="btn bg-blue"><i class="fas fa-pen"></i></button></a>
+                    <a asp-controller="Note" asp-action="Remove" asp-route-id="@note.Id" title="Remove"><button type="button" class="btn bg-red"><i class="fas fa-trash"></i></button></a>
+                    <br />
+                    @Html.Raw(note.Content.EnableHtmlLineBreaks())
+                </p>
 
-    <a asp-controller="Note" asp-action="New" asp-route-itemId="@Model.Id"><button type="button">New note</button></a>
-    <a asp-controller="Item" asp-action="Index" ><button type="button">Back to list</button></a>
+            </div>
+        }
+    </div>
 
+    
+    
+    <div class="mg-t-12">
+        <a asp-controller="Note" asp-action="New" asp-route-itemId="@Model.Id"><button type="button" class="btn btn-resize bg-green"><i class="fas fa-plus"></i> Add note</button></a>
+        <a asp-controller="Item" asp-action="Index"><button type="button" class="btn btn-resize bg-blue"><i class="fas fa-arrow-left"></i> Back to list</button></a>
+    </div>
 </div>
