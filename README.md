@@ -26,7 +26,7 @@ List of presentation technologies
 - [ ] Console (1)
 - [ ] Mvc/html/css (1)
 - [ ] Vue2/bootstrap (1)
-- [ ] Vue3/bootstrap
+- [ ] Vue3/bulma
 - [ ] Vue3/Vuetify/TS
 - [ ] WPF (1) (Non MVVM for speed (2))
 - [ ] MAUI (With new MVVM framework)
