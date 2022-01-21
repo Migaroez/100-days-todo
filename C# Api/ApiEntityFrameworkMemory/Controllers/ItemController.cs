@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiEntityFrameworkMemory.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Todo.Domain;
@@ -42,8 +43,13 @@ namespace ApiEntityFrameworkMemory.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(string description)
+        public IActionResult Post([FromBody]string description)
         {
+            if (description.IsNullOrWhitespace())
+            {
+                return Problem("Description can not be null or empty");
+            }
+
             var newItem = _itemRepository.Upsert(new Item
             {
                 Description = description,
@@ -60,8 +66,13 @@ namespace ApiEntityFrameworkMemory.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Put(Guid id, string description)
+        public IActionResult Put(Guid id, [FromBody] string description)
         {
+            if (description.IsNullOrWhitespace())
+            {
+                return Problem("Description can not be null or empty");
+            }
+
             var existingItem = _itemRepository.Get(id);
             if (existingItem == null)
             {
@@ -108,8 +119,13 @@ namespace ApiEntityFrameworkMemory.Controllers
 
         [HttpPost]
         [Route("{id}/Note")]
-        public IActionResult Note(Guid id, string content)
+        public IActionResult Note(Guid id, [FromBody] string content)
         {
+            if (content.IsNullOrWhitespace())
+            {
+                return Problem("Content can not be null or empty");
+            }
+
             var existingItem = _itemRepository.Get(id);
             if (existingItem == null)
             {
@@ -148,8 +164,13 @@ namespace ApiEntityFrameworkMemory.Controllers
 
         [HttpPut]
         [Route("/Note/{id}")]
-        public IActionResult PutNote(Guid id, string content)
+        public IActionResult PutNote(Guid id, [FromBody] string content)
         {
+            if (content.IsNullOrWhitespace())
+            {
+                return Problem("Content can not be null or empty");
+            }
+
             var item = _itemRepository.GetFiltered(new ItemFilter
             {
                 NoteId = id
