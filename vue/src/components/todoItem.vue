@@ -6,7 +6,7 @@
     <span v-else>{{item.description}}</span>
 </div>
 <div>
-    <button v-on:click="toggleComplete"
+    <button @click="$emit('toggleComplete')"
         type="button" class="btn" :class="{ 'bg-orange' : item.isCompleted, 'bg-green': !item.isCompleted}" :title="toggleTitle">
         <i v-if="item.isCompleted" class="fas fa-times"></i>
         <i v-else class="fas fa-check"></i>
@@ -19,7 +19,7 @@
         <button type="button" class="btn bg-blue" title="Edit"><i class="fas fa-pen"></i></button>
     </div>
     <div>
-        <button type="button" class="btn bg-red" title="Archive"><i class="fas fa-trash"></i></button>
+        <button @click="$emit('toggleArchived')" type="button" class="btn bg-red" title="Archive"><i class="fas fa-trash"></i></button>
     </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
             required: true
         }
     },
+    emits: ["toggleComplete","toggleArchived"],
     data() {
         return {
         }
@@ -41,13 +42,5 @@ export default {
             return this.item.isCompleted ? "undo completed" : "mark completed";
         }
     },
-    methods:{
-        toggleComplete(){
-            this.$emit('toggleComplete')
-        },
-        toggleArchived(){
-            this.$emit('toggleArchive')
-        }
-    }
 }
 </script>

@@ -3,7 +3,8 @@
   <div class="todo-list">
     <todoItem v-for="(item,index) in items" :key="index"
       :item=item
-      @toggleComplete="toggleComplete(item)"
+      @toggle-complete="toggleComplete(item)"
+      @toggle-archived="toggleArchived(item)"
     />
   </div>
   <div class="mg-t-12">
@@ -53,13 +54,19 @@ export default {
         this.replaceItem(item,toggleResult.value)
       }
     },
+    async toggleArchived(item){
+      var toggleResult = await itemService.ToggleArchived(item.id);
+      if(toggleResult.success){
+        this.GetItems();
+      }
+    },
     replaceItem(item,newItem){
       var index = this.items.findIndex(i => i.id == item.id);
       if(index < 0){
         return;
       }
       this.items.splice(index,1,newItem);
-    }
+    },
   }
 }
 </script>

@@ -1,7 +1,7 @@
 import Api from "@/apis/todo.js";
 
 export default {
-  async GetList(archivedOnly, unarchivedOnly, noteId) {
+  async GetList(archivedOnly, unarchivedOnly = true, noteId) {
     return Api()
       .get("/Item", { params: {archivedOnly, unarchivedOnly, noteId} })
       .then(async function (response) {
