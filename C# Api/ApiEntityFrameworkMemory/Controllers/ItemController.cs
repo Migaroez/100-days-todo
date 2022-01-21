@@ -95,7 +95,7 @@ namespace ApiEntityFrameworkMemory.Controllers
                 return NotFound(id);
             }
 
-            existingItem.CompleteDate = existingItem.CompleteDate != null ? DateTimeOffset.Now : null;
+            existingItem.CompleteDate = existingItem.CompleteDate == null ? DateTimeOffset.Now : null;
             var updatedItem = _itemRepository.Upsert(existingItem);
 
             return Ok(updatedItem);
@@ -111,7 +111,7 @@ namespace ApiEntityFrameworkMemory.Controllers
                 return NotFound(id);
             }
 
-            existingItem.ArchiveDate = existingItem.ArchiveDate != null ? DateTimeOffset.Now : null;
+            existingItem.ArchiveDate = existingItem.ArchiveDate == null ? DateTimeOffset.Now : null;
             var updatedItem = _itemRepository.Upsert(existingItem);
 
             return Ok(updatedItem);
