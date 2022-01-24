@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiEntityFrameworkMemory", "ApiEntityFrameworkMemory.csproj", "{2C93770D-BEF1-40A3-A27B-7F585FC8DDBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEntityFrameworkMemory", "ApiEntityFrameworkMemory.csproj", "{2C93770D-BEF1-40A3-A27B-7F585FC8DDBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\..\.Net C#\Domain\Domain.csproj", "{D9776216-03A5-44D1-BA62-C0613DD0F6D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "..\..\.Net C#\Repositories\Repositories.csproj", "{070B135C-3647-4739-ABDC-8D1EE5252D97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories.EntityFramework", "..\..\.Net C#\Repositories.EntityFramework\Repositories.EntityFramework.csproj", "{B8C1B71F-6B14-4B02-8FF7-AE2FC17515BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Data", "..\..\.Net C#\Domain.Data\Domain.Data.csproj", "{050CEE92-61C5-42B4-A497-1FE67D261FE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B8C1B71F-6B14-4B02-8FF7-AE2FC17515BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8C1B71F-6B14-4B02-8FF7-AE2FC17515BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8C1B71F-6B14-4B02-8FF7-AE2FC17515BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050CEE92-61C5-42B4-A497-1FE67D261FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050CEE92-61C5-42B4-A497-1FE67D261FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050CEE92-61C5-42B4-A497-1FE67D261FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050CEE92-61C5-42B4-A497-1FE67D261FE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,10 @@
 ﻿using System;
+using Domain.Data.Abstraction;
+using Todo.Domain.Factories;
 
 namespace Todo.Repositories.Models
 {
-    public class Note
+    public class Note : INoteData
     {
         public Guid? Id { get; set; }
 
@@ -11,12 +13,7 @@ namespace Todo.Repositories.Models
 
         public Domain.Note ToDomain()
         {
-            return new Domain.Note
-            {
-                Id = Id,
-                Content = Content,
-                CreateDate = CreateDate
-            };
+            return NoteFactory.CreateFrom(this);
         }
 
         public static Note FromDomain(Domain.Note note)

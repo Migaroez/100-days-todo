@@ -6,6 +6,7 @@ using ApiEntityFrameworkMemory.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Todo.Domain;
+using Todo.Domain.Factories;
 using Todo.Repositories;
 using Todo.Repositories.Filters;
 
@@ -43,18 +44,14 @@ namespace ApiEntityFrameworkMemory.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]string description)
+        public IActionResult Post([FromBody] string description)
         {
             if (description.IsNullOrWhitespace())
             {
                 return Problem("Description can not be null or empty");
             }
 
-            var newItem = _itemRepository.Upsert(new Item
-            {
-                Description = description,
-                CreateDate = DateTimeOffset.Now
-            });
+            var newItem = _itemRepository.Upsert(ItemFactory.Create(description));
 
             if (newItem == null)
             {
@@ -95,7 +92,7 @@ namespace ApiEntityFrameworkMemory.Controllers
                 return NotFound(id);
             }
 
-            existingItem.CompleteDate = existingItem.CompleteDate == null ? DateTimeOffset.Now : null;
+            existingItem.ToggleCompleted();
             var updatedItem = _itemRepository.Upsert(existingItem);
 
             return Ok(updatedItem);
@@ -111,7 +108,7 @@ namespace ApiEntityFrameworkMemory.Controllers
                 return NotFound(id);
             }
 
-            existingItem.ArchiveDate = existingItem.ArchiveDate == null ? DateTimeOffset.Now : null;
+            existingItem.ToggleArchived();
             var updatedItem = _itemRepository.Upsert(existingItem);
 
             return Ok(updatedItem);
@@ -154,7 +151,7 @@ namespace ApiEntityFrameworkMemory.Controllers
         [Route("/Note/{id}")]
         public Note GetNote(Guid id)
         {
-            var item =  _itemRepository.GetFiltered(new ItemFilter
+            var item = _itemRepository.GetFiltered(new ItemFilter
             {
                 NoteId = id
             }).SingleOrDefault();

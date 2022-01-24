@@ -4,6 +4,7 @@ using MvcEntityFrameworkMemory.Models;
 using System;
 using System.Linq;
 using Todo.Domain;
+using Todo.Domain.Factories;
 using Todo.Repositories;
 using Todo.Repositories.Filters;
 
@@ -36,7 +37,7 @@ namespace MvcEntityFrameworkMemory.Controllers
                 return RedirectToAction("Index");
             }
 
-            item.CompleteDate = item.CompleteDate == null ? DateTimeOffset.Now : null;
+            item.ToggleCompleted();
             _itemRepository.Upsert(item);
 
             return RedirectToAction("Index");
@@ -80,11 +81,7 @@ namespace MvcEntityFrameworkMemory.Controllers
         {
             if (item.Id == null)
             {
-                _itemRepository.Upsert(new Item
-                {
-                    CreateDate = DateTimeOffset.Now,
-                    Description = item.Description
-                });
+                _itemRepository.Upsert(ItemFactory.Create(item.Description));
                 return RedirectToAction("Index");
             }
 
@@ -119,7 +116,7 @@ namespace MvcEntityFrameworkMemory.Controllers
                 TempData["Invalid Action"] = "Cannot archive, Item not found";
                 return RedirectToAction("Index");
             }
-            item.ArchiveDate = DateTimeOffset.Now;
+            item.ToggleArchived();
             _itemRepository.Upsert(item);
             return RedirectToAction("Index");
         }

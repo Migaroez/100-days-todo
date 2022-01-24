@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Data.Abstraction;
+using Todo.Domain.Factories;
 
 namespace Todo.Repositories.Models
 {
-    public class Item
+    public class Item : IItemData<ICollection<Note>>
     {
         public Guid? Id { get; set; }
         public string Description { get; set; }
@@ -15,15 +17,7 @@ namespace Todo.Repositories.Models
 
         public Domain.Item ToDomain()
         {
-            return new Domain.Item
-            {
-                Id = Id,
-                Description = Description,
-                Notes = Notes?.Select(n => n.ToDomain()).ToList(),
-                CreateDate = CreateDate,
-                CompleteDate = CompleteDate,
-                ArchiveDate = ArchiveDate
-            };
+            return ItemFactory.CreateFrom(this);
         }
 
         public static Item FromDomain(Domain.Item item)
